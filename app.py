@@ -4,7 +4,7 @@ from datetime import datetime
 
 from steganography.steganography import *
 
-from colorama import init,Fore,Style   #It is Used For Coloring Purpose
+from colorama import init,Fore,Style   #It is Imported Here For Using Different Colors For Different Texts
 
 import  sys
 
@@ -30,69 +30,85 @@ question="Kindly Enter Y for Yes and N for No\n"
 
 answer=raw_input(question)               #answer stores whether user is existing or new
 print(Style.RESET_ALL)
+def add_status():
+    updated_status_message = None
+
+    if spy.current_status_msg != None:
+
+        print 'Your current status message is %s \n' % (spy.current_status_msg)
+    else:
+        print 'You don\'t have any status message currently \n'
+
+    default = raw_input("Do you want to select from the older status (y/n)? ")
+
+    if default.upper() == "N":
+        new_status_message = raw_input("What status message do you want to set? ")
+
+        if len(new_status_message) > 0:
+            STATUS_MSGS.append(new_status_message)
+            updated_status_message = new_status_message
+
+    elif default.upper() == 'Y':
+
+        item_position = 1
+
+        for message in STATUS_MSGS:
+            print '%d. %s' % (item_position, message)
+            item_position = item_position + 1
+
+        message_selection = int(raw_input("\nChoose from the above messages "))
+
+        if len(STATUS_MSGS) >= message_selection:
+            updated_status_message = STATUS_MSGS[message_selection - 1]
+
+    else:
+        print 'The option you chose is not valid! Press either y or n.'
+
+    if updated_status_message:
+        print 'Your updated status message is: %s' % (updated_status_message)
+    else:
+        print 'You current don\'t have a status update'
+
+    return updated_status_message
 
 
+
+'''ALTERNATIVE WAY OF ABOVE METHOD CAN BE FOLLOWING
 def add_status() :                       #definition for adding new status
-
     init()
+    updated_status_msg=None
 
     if spy.current_status_msg is None :
-
         print(Fore.GREEN+"You Did Not have Any Status Message\n Kindly Add It")
 
     else :
-
-        print("Your Current Status Message Is \n %s \n" % (spy.current_status_msg))    #spy has previous status
-
+    print("Your Current Status Message Is \n %s \n" % (spy.current_status_msg))    #spy has previous status
     add=raw_input("Do You Want To Add Status From Older Messages Or Want New \tPress Y or N\n\n")
-
- #if user enters something and it must be either Y or N only than if block will execute (BOUNDARY CONDITIONS FULLFILL)
-
+    
+#if user enters something and it must be either Y or N only than if block will execute (BOUNDARY CONDITIONS FULLFILL)
 
     if(len(add)>0 and add.upper()=="Y" or add.upper()=="N") :
-
         if(add.upper()=="Y") :
-
             print("\n\n\t\tSELECT STATUS FROM FOLLOWING\n")
-
             status_num=1
             for x in STATUS_MSGS :
-
                 print("\t\t%d. %s"%(status_num,x))
-
-                status_num+=1
-
-        num=int(raw_input("Enter The Number Correspondiong To The Status\n"))
-
-        exact_num=num-1
-
-        updated_status_msg=STATUS_MSGS[exact_num]
-
+                    status_num+=1
+            num=int(raw_input("Enter The Number Correspondiong To The Status\n"))
+            exact_num=num-1
+            updated_status_msg=STATUS_MSGS[exact_num]
     elif(add.lower()=="n") :
-
         ques="What Is The Status That You Want To Update\n"
-
         ans=raw_input(ques)
-
         if(len(ans)>0) :
-
             updated_status_msg=ans
-
             STATUS_MSGS.append(updated_status_msg)
-
         else :
-
             print("you didn't enter something\n")
-
     else :
-
         print("Kindly Enter A Valid Character And Repeat The Same Procedure\n")
-
-        add_status()         #RECURSSION BECAUSE USER DOES NOT ENTER CORRECT CHARACTER THAT IS Y OR N
-
-    print (Style.RESET_ALL)
-
-    return updated_status_msg
+    return updated_status_msg  
+    #THIS CAN ALSO BE USED INSTEAD OF ABOVE'''
 
 def add_new_friend() :
 
@@ -117,37 +133,37 @@ def add_new_friend() :
 
 
 
-    if(len(new_friend_detail.first_name)>0 and len(new_friend_detail.last_name)>0 and new_friend_detail.age>12) :
+   # if(len(new_friend_detail.first_name)>0 and len(new_friend_detail.last_name)>0 and new_friend_detail.age>12) :
 
 
-        if(len(new_friend_detail.hometown)>0 and new_friend_detail.age<50 and len(new_friend_detail)>0) :
+       # if(len(new_friend_detail.hometown)>0 and new_friend_detail.age<50 and len(new_friend_detail)>0) :
 
 
-            print("Very Nice\n")
+            #print("Very Nice\n")
 
-            print("FRIEND SUCCESSFULLY ADDED\n NOW WE HAVE NEW FRIEND\n")
+    print("FRIEND SUCCESSFULLY ADDED\n NOW WE HAVE NEW FRIEND\n")
 
-            friends.append(new_friend_detail)
+    friends.append(new_friend_detail)
 
-        elif(new_friend_detail.age<12 or new_friend_detail.age>50) :
+        #elif(new_friend_detail.age<12 or new_friend_detail.age>50) :
 
-            print("spy age must be in Between 12 to 50 \nSorry We can't able to add you\n")
+           # print("spy age must be in Between 12 to 50 \nSorry We can't able to add you\n")
 
-        else :
+        #else :
 
-            print("Invalid Entries\n")
+           # print("Invalid Entries\n")
 
-            print("kindly try again adding new friend\n")
+            #print("kindly try again adding new friend\n")
 
-            add_new_friend()
+            #add_new_friend()
 
 
 
 #-----------RECURSSION DUE TO INVALID ENTRIES SO THAT SPY CAN ADD A VALID ENTRIES---------------------------------------
 
-    else :
+   # else :
 
-        print("Something went wrong!!!kindly try again\n")
+  #      print("Something went wrong!!!kindly try again\n")
 
     print("You Have Currently %d friends\n"%(len(friends)))
 
@@ -204,9 +220,9 @@ def read_a_message() :
 
     sender=selection_of_friend()        #Which Chat Do You Want To Read,Who is the SEnder
 
-    output_path=raw_input("What Is The Name of Image From Which You Want To Read A Text\n")
+    #output_path=raw_input("What Is The Name of Image From Which You Want To Read A Text\n")
 
-    secret_text=Steganography.decode(output_path)
+    secret_text=Steganography.decode("output.jpg")
 
     print ("The Text Message Is %s "%(secret_text))
 
@@ -219,6 +235,7 @@ def read_a_message() :
 def read_history_of_chat() :
 
     chat_between=selection_of_friend()
+    chat_between+=1
 
     print("You Have Selected Friend Number %d"%(chat_between))
 
@@ -271,7 +288,7 @@ def start_chat(spy):
 
                 if menu_choice == 1:
 
-                    spy.current_status_message = add_status()
+                    spy.current_status_msg = add_status()
 
                 elif menu_choice == 2:
 
@@ -301,6 +318,34 @@ def start_chat(spy):
 
         print "Sorry you are not of the correct age to be a spy"
 
+if answer == "Y":
+
+    start_chat(spy)
+
+else:
+
+    spy = Spy('', '','',0.00,0,'','')
+
+    spy.first_name = raw_input("Welcome to spy chat application, you must tell me your first name :\n ")
+
+    spy.last_name=raw_input("Now Kindly Tell Me Your Last Name\n")
+
+    if len(spy.first_name and spy.last_name) > 0:
+        spy.salutation = raw_input("Please Enter An Appropriate Salutation Which Is Suitable For You\n ")
+
+        spy.age = raw_input("What is Your Age\n")
+
+        spy.age = int(spy.age)
+
+        spy.rating = raw_input("What is your spy rating?")
+
+        spy.rating = float(spy.rating)
+
+        start_chat(spy)
+
+    else:
+
+        print("Please add a valid spy name")
 
 
 
