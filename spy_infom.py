@@ -37,9 +37,10 @@ class ChattingMessages :
 
 
 spy=Spy('Vishav','Gupta','Mr.',5.99,20,'Programming','Shimla')     #Current Spy
+
 #Here spy is the object of class spy
 
-#------------------------FOLLOWING ARE FRIENDS OF THIS SPY---------------------------------------------------------------
+#------------------------FOLLOWING ARE FRIENDS OF THIS SPY--------------------------------------------------------------
 
 friend_1=Spy('Adil','Thakur','Mr.',6.00,21,'Playing','Mumbai')
 
@@ -50,4 +51,7 @@ friend_3=Spy('Surbhi','Gupta','Mrs.',5.99,30,'Travelling','Chandigarh')
 friend_4=Spy('Amit','Mehta','Dr.',9.00,28,'Eating','Bhopal')
 
 
-friends=[friend_1,friend_2,friend_3,friend_4] #LIST WHICH IS STORING OBJECTS OR DETAILS OF FRIENDS OF SPYsp
+friends=[friend_1,friend_2,friend_3,friend_4]
+
+#ABOVE IS LIST WHICH IS STORING OBJECTS OR DETAILS OF FRIENDS OF SPY
+
