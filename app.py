@@ -221,6 +221,18 @@ def read_history_of_chat() :
 
         if chat.sent_by_me :
 
+            print("[%s] %s %s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
+
+        else :
+
+            print("[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name,chat.message))
+
+
+
+
+
+
+
 
 
 
