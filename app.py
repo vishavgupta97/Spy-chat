@@ -4,15 +4,19 @@ from datetime import datetime
 
 from steganography.steganography import *
 
-from colorama import init,Fore,Style   #It is Imported Here For Using Different Colors For Different Texts
+from colorama import init,Fore,Style   #(It is Imported Here For Using Different Colors For Different Texts)
 
-import  sys
+import  sys                           #(It is Imported To Print A Statement In a Single Line Without Going To a New Line
+                                      #Just Like println for New line and print For Same line In JAVA)
 
 import re
 
-init()
-print (Fore.BLUE + "vishav")
-print (Style.RESET_ALL)
+#(Above Library Is Imported To Allow Alphabets As Input Only,In Simple FOr Validation Purpose)
+#init()
+#print (Fore.BLUE + "vishav")
+#print (Style.RESET_ALL)
+
+
 #--------------------------------------Following are Available Status Messages------------------------------------------
 
 
@@ -28,45 +32,91 @@ print("Do You Want To Continue As %s %s %s Or Not"%(spy.salutation,spy.first_nam
 
 question="Kindly Enter Y for Yes and N for No\n"
 
-answer=raw_input(question)               #answer stores whether user is existing or new
+answer=raw_input(question)   #answer stores whether user is existing or new
+
 print(Style.RESET_ALL)
+
 def add_status():
+
     updated_status_message = None
 
-    if spy.current_status_msg != None:
+    if spy.current_status_msg !=  None:
 
-        print 'Your current status message is %s \n' % (spy.current_status_msg)
+        print "Your current status message is %s \n" % (spy.current_status_msg)
+
     else:
-        print 'You don\'t have any status message currently \n'
 
-    default = raw_input("Do you want to select from the older status (y/n)? ")
+        print "You don\'t have any status message currently \n"
+
+    while(True) :
+
+        default = raw_input("Do you want to select from the older status (y/n)? \n")
+
+        if(default.upper()=="Y" or default.lower()=="n" ) :
+            break
+
+        else :
+            continue
+
 
     if default.upper() == "N":
-        new_status_message = raw_input("What status message do you want to set? ")
+        init()
+        sys.stdout.write(Fore.BLACK+" ")
+        while(True) :
 
-        if len(new_status_message) > 0:
-            STATUS_MSGS.append(new_status_message)
-            updated_status_message = new_status_message
+            new_status_message = raw_input("What status message do you want to set? ")
+
+            v1=r"([a-zA-Z]+)"
+
+            if len(new_status_message) > 0 and re.search(v1,new_status_message):
+
+                STATUS_MSGS.append(new_status_message)
+
+                updated_status_message = new_status_message
+
+                break
+
+            else :
+
+                print ("Kindly Enter Valid Entries Only\n")
+
+                continue
+
+
 
     elif default.upper() == 'Y':
 
         item_position = 1
-
+        print "YOU HAVE FOLLOWING OLDER STATUS\n"
+        print "KINDLY SELECT ONE FROM THE BELOW\n"
         for message in STATUS_MSGS:
-            print '%d. %s' % (item_position, message)
-            item_position = item_position + 1
 
-        message_selection = int(raw_input("\nChoose from the above messages "))
+            print "%d. %s " % (item_position, message)
+
+            item_position = item_position + 1
+        try :
+
+            message_selection = int(raw_input("\nChoose from the above messages "))
+
+        except ValueError :
+
+            print ("Please Enter A Value Only And Try Again\n")
+
 
         if len(STATUS_MSGS) >= message_selection:
+
             updated_status_message = STATUS_MSGS[message_selection - 1]
 
     else:
+
         print 'The option you chose is not valid! Press either y or n.'
 
     if updated_status_message:
+
         print 'Your updated status message is: %s' % (updated_status_message)
+
     else:
+
         print 'You current don\'t have a status update'
 
     return updated_status_message
@@ -108,6 +158,7 @@ def add_status() :                       #definition for adding new status
     else :
         print("Kindly Enter A Valid Character And Repeat The Same Procedure\n")
     return updated_status_msg  
+    
     #THIS CAN ALSO BE USED INSTEAD OF ABOVE'''
 
 def add_new_friend() :
@@ -241,13 +292,17 @@ def read_history_of_chat() :
 
     for chat in friends[chat_between].old_chats :
 
+        init()
+
         if chat.sent_by_me :
 
-            print("[%s] %s %s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
+            print(Fore.BLUE+"[%s] %s %s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
 
         else :
 
-            print("[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name,chat.message))
+            print(Fore.BLUE+"[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name,chat.message))
+
+            print(Style.RESET_ALL)
 
 
 def start_chat(spy):
