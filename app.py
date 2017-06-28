@@ -5,6 +5,11 @@ from datetime import datetime
 from steganography.steganography import *
 
 from colorama import init,Fore,Style   #It is Used For Coloring Purpose
+
+import  sys
+
+import re
+
 init()
 print (Fore.BLUE + "vishav")
 print (Style.RESET_ALL)
@@ -228,6 +233,73 @@ def read_history_of_chat() :
             print("[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name,chat.message))
 
 
+def start_chat(spy):
+
+    spy.first_name = spy.salutation + " " + spy.first_name +" " +spy.last_name
+
+    if spy.age > 12 and spy.age < 50:
+
+        print "Authentication complete. Welcome  %s of %d and rating of %f"%(spy.first_name,spy.age,spy.rating)
+
+        sys.stdout.write("Proud To Be Here\n")
+
+        show_menu = True
+
+        while show_menu:
+
+            print("\t\tWHICH OPERATION DO YOU WANT TO PERFORM \n\n")
+
+            print("\t\tKindly Select From Following Operatioons\n\n")
+
+            print("\t\t1. Add A Status For Updation\n")
+
+            print("\t\t2. Add A New Friend\n")
+
+            print("\t\t3. Send A Secret Message To A Friend\n")
+
+            print ("\t\t4. Read A Secret Message\n")
+
+            print ("\t\t5. Read Older Chats From A User\n")
+
+            print ("\t\t6. Closing The Application\n")
+
+            menu_choice = raw_input("Kindly Add One Choice From Above\n")
+
+            if len(menu_choice) > 0:
+
+                menu_choice = int(menu_choice)
+
+                if menu_choice == 1:
+
+                    spy.current_status_message = add_status()
+
+                elif menu_choice == 2:
+
+                    number_of_friends = add_new_friend()
+
+                    print 'You have %d friends' % (number_of_friends)
+
+                elif menu_choice == 3:
+
+                    send_a_secret_message()
+
+                elif menu_choice == 4:
+
+                    read_a_message()
+
+                elif menu_choice == 5:
+
+                    read_history_of_chat()
+
+                else:
+
+                    show_menu = False
+
+                    continue
+
+    else:
+
+        print "Sorry you are not of the correct age to be a spy"
 
 
 
