@@ -4,7 +4,7 @@ from datetime import datetime
 
 from steganography.steganography import *
 
-from colorama import init,Fore,Style
+from colorama import init,Fore,Style   #It is Used For Coloring Purpose
 init()
 print (Fore.BLUE + "vishav")
 print (Style.RESET_ALL)
@@ -220,7 +220,7 @@ def read_history_of_chat() :
     for chat in friends[chat_between].old_chats :
 
         if chat.sent_by_me :
-            print(On [])
+
 
 
 
