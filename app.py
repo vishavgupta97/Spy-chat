@@ -190,16 +190,17 @@ def add_new_friend() :
         else :
             break
 
-
-        new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
-
-    except ValueError:
-
-        print "Kindly Enter Integer Value For Age And Floating Value For Ratings"
-
-
-
-
+    while True :
+        try :
+            new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
+        except ValueError :
+            print("Kindly add valid entry")
+            continue
+        if new_friend_detail.age<0 :
+            print  "age can't be negative"
+            continue
+        else :
+            break
     while(True) :
         v3=r"([a-zA-Z]+)"
         new_friend_detail.interest=raw_input("Enter your friend Interest\n")
@@ -210,43 +211,9 @@ def add_new_friend() :
         else :
             print("Something Went Going")
             continue
-
-
-#----------------------------------    FOLLOWING ARE BOUNDARY CONDITIONS    --------------------------------------------
-
-
-
-   # if(len(new_friend_detail.first_name)>0 and len(new_friend_detail.last_name)>0 and new_friend_detail.age>12) :
-
-
-       # if(len(new_friend_detail.hometown)>0 and new_friend_detail.age<50 and len(new_friend_detail)>0) :
-
-
-            #print("Very Nice\n")
-
     print("FRIEND SUCCESSFULLY ADDED\n NOW WE HAVE NEW FRIEND\n")
 
     friends.append(new_friend_detail)
-
-        #elif(new_friend_detail.age<12 or new_friend_detail.age>50) :
-
-           # print("spy age must be in Between 12 to 50 \nSorry We can't able to add you\n")
-
-        #else :
-
-           # print("Invalid Entries\n")
-
-            #print("kindly try again adding new friend\n")
-
-            #add_new_friend()
-
-
-
-#-----------RECURSSION DUE TO INVALID ENTRIES SO THAT SPY CAN ADD A VALID ENTRIES---------------------------------------
-
-   # else :
-
-  #      print("Something went wrong!!!kindly try again\n")
 
     print("You Have Currently %d friends\n"%(len(friends)))
 
