@@ -305,15 +305,27 @@ def selection_of_friend() :
 
 def send_a_secret_message() :     #This Function Is Used To Send a Secret Message To A Friend
 
+    sys.stdout.write(Fore.BLACK+" ")
+
     message_to=selection_of_friend()     #Calling To A function that will return selected friend
+
 
     original_image=raw_input("What is The Name Of Image Under Which You Want To Hide A Message\n")
 
-    init()
-
-    text=raw_input(Fore.CYAN+"WRITE TEXT MESSAGE THAT YOU WANT TO SEND\n")
-
-    print(Style.RESET_ALL)
+    while True:
+        sys.stdout.write(Fore.Red+"  ")
+        global text
+        text=raw_input(Fore.CYAN+"\nWRITE TEXT MESSAGE THAT YOU WANT TO SEND\n")
+        v3=r"([a-zA-Z]+" ")"
+        if re.search(v3,text) :
+            break
+        else :
+            print("Kindly Enter A Valid Message Only\n")
+            continue
+    if len(text)>100 :
+        print(Fore.RED+"\nYOU HAVE ECEEDED THE LIMIT OF SENDING THE MESSAGE")
+        print("SORRY WE ARE REMOVING YOU")
+        del friends[selection_of_friend]
 
     output_path=raw_input("What You Will Call Encrypted Message Under Image\n")
 
