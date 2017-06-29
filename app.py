@@ -412,7 +412,7 @@ elif answer.lower()=="n" :
 
     spy.last_name=raw_input("Now Kindly Tell Me Your Last Name\n")
 
-    if len(spy.first_name and spy.last_name) > 0:
+    if len(spy.first_name and spy.last_name) > 0 :
         spy.salutation = raw_input("Please Enter An Appropriate Salutation Which Is Suitable For You\n ")
 
         spy.age = raw_input("What is Your Age\n")
