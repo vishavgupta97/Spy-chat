@@ -14,6 +14,7 @@ import  sys                           #(It is Imported To Print A Statement In a
                                       #Just Like println for New line and print For Same line In JAVA)
 
 import re
+#This Library Is Imported To Validate Certain Characters entered By Users Is Correct Or Not
 
 #--------------------------------------Following are Available Status Messages------------------------------------------
 
@@ -21,44 +22,52 @@ STATUS_MSGS=['Don\'t Disturb! Busy Now','Very Happy','Enjoying Holidays','In a M
 
 init()
 
-print(Fore.BLUE+"Welcome To Spy Chat Application\n")           #First Line Of Chat application
+print(Fore.BLACK+"Welcome To Spy Chat Application\n")           #First Line Of Chat application
+
+#NOTE:(HERE MESSAGES ARE PRINTED IN BLACK COLORS AND ONE OF THE OBJECTIVE OF THIS APPLICATION IS FULLFILLED)
 
 print("We Are Very Happy To Get Your Presence Here\n")
 
-print("Do You Want To Continue As %s %s %s Or Not"%(spy.salutation,spy.first_name,spy.last_name))
+print"Do You Want To Continue As "+Fore.RED+"%s %s %s Or Not"%(spy.salutation,spy.first_name,spy.last_name)
 
-question="Kindly Enter Y for Yes and N for No\n"
+question=Fore.BLACK+"Kindly Enter Y for Yes and N for No\n"
 
 answer=raw_input(question)   #answer stores whether user is existing or new
 
 print(Style.RESET_ALL)
 
 def add_status():
-
+    init()
     updated_status_message = None
 
     if spy.current_status_msg !=  None:
 
-        print "Your current status message is %s \n" % (spy.current_status_msg)
+        print Fore.GREEN+"Your current status message is %s \n" % (spy.current_status_msg)
 
     else:
 
-        print "You don\'t have any status message currently \n"
+        print Fore.BLACK+"You don\'t have any status message currently \n"
 
     while(True) :
 
-        default = raw_input("Do you want to select from the older status (y/n)? \n")
+        default = raw_input(Fore.BLACK+"Do you want to select from the older status (y/n)? \n") #This will be in black
 
         if(default.upper()=="Y" or default.lower()=="n" ) :
+            #(This condition must be Satisfied otherwise It will Be ITERATE
+
             break
 
         else :
+
             continue
 
 
     if default.upper() == "N":
+
         init()
+
         sys.stdout.write(Fore.BLACK+" ")
+
         while(True) :
 
             new_status_message = raw_input("What status message do you want to set? ")
@@ -79,13 +88,17 @@ def add_status():
 
                 continue
 
+                #(IF USERS WILL ENTER ANY OF THE INVALID ENTRIES IT WILL ITERATE AGAIN AND AGAIN)
 
 
     elif default.upper() == 'Y':
-
+        init()
         item_position = 1
-        print "YOU HAVE FOLLOWING OLDER STATUS\n"
+
+        print Fore.BLACK+"YOU HAVE FOLLOWING OLDER STATUS\n"
+
         print "KINDLY SELECT ONE FROM THE BELOW\n"
+
         for message in STATUS_MSGS:
 
             print "%d. %s " % (item_position, message)
@@ -117,7 +130,7 @@ def add_status():
 
         print 'You current don\'t have a status update'
 
-    return updated_status_message
+    return updated_status_message #(UPDATED MESSAGES WILL BE RETURNED AFTER SATISFYING ALL BOUNDARY CONDITION)
 
 
 
@@ -161,53 +174,87 @@ def add_status() :                       #definition for adding new status
 
 def add_new_friend() :
 
-    new_friend_detail=Spy('','','',0.00 ,0,'','')
+    new_friend_detail=Spy('','','',0.00 ,0,'','') #NEW OBJECT new_friend_detail OF SPY CLASS IS CREATED FOR ADDING
+                                                  #NEW FRIEND
+
     while True :
-        v2=r"([a-zA-Z]+)"
+
+        v2=r"([a-zA-Z]+)"    #VALIDATING FIRST,LAST NAME IN SHORT USING re LIBRARIES
+
         new_friend_detail.first_name=raw_input("What is the First Name Of Your Friend\n")
 
         new_friend_detail.last_name=raw_input("What is the Last Name Of Your Friend\n")
 
         new_friend_detail.salutation=raw_input("Enter The appropriate Salutation for Your Friend\n")
+
         if re.search(v2,new_friend_detail.first_name) and re.search(v2,new_friend_detail.last_name) and re.search(v2,
         new_friend_detail.salutation) :
+
             break
+
         else :
+
             print "You Have Entered Some Invalid Entry\nKIndly Continue"
-            continue
+
+            continue #ITERATE AGAIN IF THERE IS MISSING SOMETHING
+
     while True:
+
         try :
+
             new_friend_detail.rating=float(raw_input("Enter Ratings\n"))
+
         except ValueError:
+
             print "kindly enter valid detail"
+
             continue
+
         if new_friend_detail.rating<0:
+
             print "rating can't negative"
+
             continue
         else :
+
             break
 
     while True :
+
         try :
+
             new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
+
         except ValueError :
+
             print("Kindly add valid entry")
             continue
+
         if new_friend_detail.age<0 :
+
             print  "age can't be negative"
+
             continue
+
         else :
+
             break
     while(True) :
         v3=r"([a-zA-Z]+)"
+
         new_friend_detail.interest=raw_input("Enter your friend Interest\n")
 
         new_friend_detail.hometown=raw_input("Enter His\Her Hometown\n")
+
         if re.search(v3,new_friend_detail.interest) and re.search(v3,new_friend_detail.hometown) :
+
             break
+
         else :
             print("Something Went Going")
+
             continue
+
     print("FRIEND SUCCESSFULLY ADDED\n NOW WE HAVE NEW FRIEND\n")
 
     friends.append(new_friend_detail)
@@ -233,17 +280,24 @@ def selection_of_friend() :
     while True:
 
         try :
+
             friend_numb=int(raw_input("Now Enter A Number\n"))
+
         except ValueError:
+
             print("Kindly Enter Valid Number Only")
+
             continue
+
         if friend_numb < 0:
-            print "Sorry your response ca not be negative"
+
+            print "Sorry your response cannot be negative"
+
             continue
+
         else:
+
             break
-
-
 
     friend_selected=friend_numb-1
 
@@ -272,7 +326,9 @@ def send_a_secret_message() :     #This Function Is Used To Send a Secret Messag
 #ABOVE STATEMENT WILL STORES TO WHICH FRIEND WHEN WE SEND A PARTICULAR MESSAGE AND THIS WILL ALSO STORES OUR CHATS ALSO
 
     print ("your secret image is ready\n")
+
     print("Your Message Is Successfully send To Your Friend\n")
+
     print("Thanks For Using Our Application for Chatting\n\n")
 
 
@@ -295,6 +351,7 @@ def read_a_message() :
 def read_history_of_chat() :
 
     chat_between=selection_of_friend()
+
     chat_between+=1
 
     print("You Have Selected Friend Number %d"%(chat_between))
@@ -305,14 +362,18 @@ def read_history_of_chat() :
 
         if chat.sent_by_me :
 
-            print(Fore.BLUE+"[%s] %s %s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
+            print(Fore.BLUE+"[%s] "+Fore.GREEN+" %s %s"%(chat.sending_time.strftime("%d %B %Y"),+Fore.CYAN+
+                  "You said",chat.message))
+
+#HERE PRINTING CHAT HISTORY USING DIFFERENT COLOR AND TIME USING BLUE COLOR,SATISFYING ONE OF THE APPLICATION OBJECTIVE
 
         else :
 
-            print(Fore.BLUE+"[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name,chat.message))
+            print(Fore.BLUE+"[%s} "+Fore.RED+" %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name
 
-            print(Style.RESET_ALL)
+                        ,chat.message))
 
+            #PRINTING CHAT HISTORY USING DIFFERENT COLORS AND CHAT USING DIFFERENT COLOR AND SPY NAME IN RED COLOR
 
 def start_chat(spy):
 
@@ -320,9 +381,14 @@ def start_chat(spy):
 
     if spy.age > 12 and spy.age < 50:
 
-        print "Authentication complete. Welcome  %s of %d and rating of %f"%(spy.first_name,spy.age,spy.rating)
+        init()
 
-        sys.stdout.write("Proud To Be Here\n")
+        print Fore.BLACK+"Authentication complete. Welcome "+Fore.RED+" %s "+Fore.BLACK+"of age %d " \
+                            "and rating of %f"%(spy.first_name,spy.age,spy.rating)
+
+        #PRINTING SPY NAME USING RED COLORS AND MESSAGES USING BLACK COLORS
+
+        sys.stdout.write("Proud To Be Here\n") #USING SYS LIBRARY
 
         show_menu = True
 
