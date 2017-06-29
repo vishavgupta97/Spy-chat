@@ -98,6 +98,7 @@ def add_status():
 
             message_selection = int(raw_input("\nChoose from the above messages "))
 
+
         except ValueError :
 
             print ("Please Enter A Value Only And Try Again\n")
@@ -164,20 +165,42 @@ def add_status() :                       #definition for adding new status
 def add_new_friend() :
 
     new_friend_detail=Spy('','','',0.00 ,0,'','')
+    while True :
+        v2=r"([a-zA-Z]+)"
+        new_friend_detail.first_name=raw_input("What is the First Name Of Your Friend\n")
 
-    new_friend_detail.first_name=raw_input("What is the First Name Of Your Friend\n")
+        new_friend_detail.last_name=raw_input("What is the Last Name Of Your Friend\n")
 
-    new_friend_detail.last_name=raw_input("What is the Last Name Of Your Friend\n")
+        new_friend_detail.salutation=raw_input("Enter The appropriate Salutation for Your Friend\n")
+        if re.search(v2,new_friend_detail.first_name) and re.search(v2,new_friend_detail.last_name) and re.search(v2,
+        new_friend_detail.salutation) :
+            break
+        else :
+            print "You Have Entered Some Invalid Entry\nKIndly Continue"
+            continue
 
-    new_friend_detail.salutation=raw_input("Enter The appropriate Salutation for Your Friend\n")
+    try :
+        new_friend_detail.rating=float(raw_input("Enter Ratings\n"))
 
-    new_friend_detail.rating=float(raw_input("Enter Ratings\n"))
+        new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
 
-    new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
+    except ValueError:
 
-    new_friend_detail.interest=raw_input("Enter your friend Interest\n")
+        print "Kindly Enter Integer Value For Age And Floating Value For Ratings"
 
-    new_friend_detail.hometown=raw_input("Enter His\Her Hometown\n")
+
+
+
+    while(True) :
+        v3=r"([a-zA-Z]+)"
+        new_friend_detail.interest=raw_input("Enter your friend Interest\n")
+
+        new_friend_detail.hometown=raw_input("Enter His\Her Hometown\n")
+        if re.search(v3,new_friend_detail.interest) and re.search(v3,new_friend_detail.hometown) :
+            break
+        else :
+            print("Something Went Going")
+            continue
 
 
 #----------------------------------    FOLLOWING ARE BOUNDARY CONDITIONS    --------------------------------------------
@@ -224,17 +247,21 @@ def selection_of_friend() :
 
     num=1
 
-    print("Enter friend number to perform appropriate operation\n\n")
+    print("Enter friend number to perform appropriate operation\n")
 
-    print("PLEASE ENTER A VALID NUMBER ONLY TO PERFORM SUCCESSFUL OPERATION\n")    #ALERT TO SPY
+    print("PLEASE ENTER A VALID NUMBER ONLY TO PERFORM SUCCESSFUL OPERATION")    #ALERT TO SPY
 
     for friend in friends :
 
         print("%d. %s %s aged %d with rating %f is online\n"%(num,friend.first_name,friend.last_name,friend.age,friend.rating))
 
         num+=1
+    try :
+        friend_numb=int(raw_input("Now Enter A Number\n"))
+    except ValueError:
+        print("Kindly Enter Valid Number Only")
 
-    friend_numb=int(raw_input("Now Enter A Number\n"))
+
 
     friend_selected=friend_numb-1
 
@@ -319,21 +346,21 @@ def start_chat(spy):
 
         while show_menu:
 
-            print("\t\tWHICH OPERATION DO YOU WANT TO PERFORM \n\n")
+            print("\tWHICH OPERATION DO YOU WANT TO PERFORM \n")
 
-            print("\t\tKindly Select From Following Operatioons\n\n")
+            print("\tKindly Select From Following Operatioons")
 
-            print("\t\t1. Add A Status For Updation\n")
+            print("\t1. Add A Status For Updation")
 
-            print("\t\t2. Add A New Friend\n")
+            print("\t2. Add A New Friend")
 
-            print("\t\t3. Send A Secret Message To A Friend\n")
+            print("\t3. Send A Secret Message To A Friend")
 
-            print ("\t\t4. Read A Secret Message\n")
+            print ("\t4. Read A Secret Message")
 
-            print ("\t\t5. Read Older Chats From A User\n")
+            print ("\t5. Read Older Chats From A User")
 
-            print ("\t\t6. Closing The Application\n")
+            print ("\t6. Closing The Application")
 
             menu_choice = raw_input("Kindly Add One Choice From Above\n")
 
@@ -373,11 +400,11 @@ def start_chat(spy):
 
         print "Sorry you are not of the correct age to be a spy"
 
-if answer == "Y":
+if answer.upper() == "Y":
 
     start_chat(spy)
 
-else:
+elif answer.lower()=="n" :
 
     spy = Spy('', '','',0.00,0,'','')
 
@@ -398,9 +425,13 @@ else:
 
         start_chat(spy)
 
-    else:
+    else :
 
-        print("Please add a valid spy name")
+        print("Enter A Valid Spy Name Only")
+
+else:
+
+    print("Please Enter A Valid Character Only\n")
 
 
 
