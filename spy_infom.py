@@ -1,5 +1,5 @@
 
-from datetime import datetime            #Importing Datetime To Store The Timing When We Have Send A Particular MSG...
+from datetime import datetime             #Importing Datetime To Store The Timing When We Have Send A Particular MSG...
 
 class Spy :
                                          # THIS IS CONSTRUCTOR TO STORE SPY DETAILS
@@ -49,7 +49,6 @@ friend_2=Spy('Arushi','Sharma','Ms.',6.8,18,'Chatting','Sri Nagar')
 friend_3=Spy('Surbhi','Gupta','Mrs.',5.99,30,'Travelling','Chandigarh')
 
 friend_4=Spy('Amit','Mehta','Dr.',9.00,28,'Eating','Bhopal')
-
 
 friends=[friend_1,friend_2,friend_3,friend_4]
 
