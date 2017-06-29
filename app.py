@@ -1,24 +1,21 @@
 from spy_infom import Spy,spy,friends,ChattingMessages
+#Spy_infom.py is A File where Details of Default Spy Is Stored
 
 from datetime import datetime
+#(It Is Used for Timestamping To Store The Time Of Sending A Message With Date)
 
 from steganography.steganography import *
+#(This Library Is Imported To Hide A message Under The Image And To Read A Secret Message
 
-from colorama import init,Fore,Style   #(It is Imported Here For Using Different Colors For Different Texts)
+from colorama import init,Fore,Style
+#(It is Imported Here For Using Different Colors For Different Texts)
 
 import  sys                           #(It is Imported To Print A Statement In a Single Line Without Going To a New Line
                                       #Just Like println for New line and print For Same line In JAVA)
 
 import re
 
-#(Above Library Is Imported To Allow Alphabets As Input Only,In Simple FOr Validation Purpose)
-#init()
-#print (Fore.BLUE + "vishav")
-#print (Style.RESET_ALL)
-
-
 #--------------------------------------Following are Available Status Messages------------------------------------------
-
 
 STATUS_MSGS=['Don\'t Disturb! Busy Now','Very Happy','Enjoying Holidays','In a Meeting','Songs are my life']
 
