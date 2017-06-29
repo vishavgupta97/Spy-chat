@@ -178,9 +178,18 @@ def add_new_friend() :
         else :
             print "You Have Entered Some Invalid Entry\nKIndly Continue"
             continue
+    while True:
+        try :
+            new_friend_detail.rating=float(raw_input("Enter Ratings\n"))
+        except ValueError:
+            print "kindly enter valid detail"
+            continue
+        if new_friend_detail.rating<0:
+            print "rating can't negative"
+            continue
+        else :
+            break
 
-    try :
-        new_friend_detail.rating=float(raw_input("Enter Ratings\n"))
 
         new_friend_detail.age=int(raw_input("Enter Age Of Your friend\n"))
 
@@ -256,10 +265,19 @@ def selection_of_friend() :
         print("%d. %s %s aged %d with rating %f is online\n"%(num,friend.first_name,friend.last_name,friend.age,friend.rating))
 
         num+=1
-    try :
-        friend_numb=int(raw_input("Now Enter A Number\n"))
-    except ValueError:
-        print("Kindly Enter Valid Number Only")
+
+    while True:
+
+        try :
+            friend_numb=int(raw_input("Now Enter A Number\n"))
+        except ValueError:
+            print("Kindly Enter Valid Number Only")
+            continue
+        if friend_numb < 0:
+            print "Sorry your response ca not be negative"
+            continue
+        else:
+            break
 
 
 
