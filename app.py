@@ -247,7 +247,8 @@ def add_new_friend() :
 
             break
 
-    if new_friend_detail.age<12 or new_friend_detail.age>50 :
+    if new_friend_detail.age< 12 or new_friend_detail.age > 50 :
+
         print Fore.BLUE+"Sorry Your Age Is Not Valid For Using Spy Chat Application"
         print(Style.RESET_ALL)
         start_chat(spy)
@@ -299,7 +300,7 @@ def selection_of_friend() :
         try :
 
             friend_numb=int(raw_input("Now Enter A Number\n"))
-            break
+
 
         except ValueError:
 
@@ -321,6 +322,8 @@ def selection_of_friend() :
 
     return friend_selected        #RETURNING CHOICE OF USER FOR SELECTING A FRIEND
 
+text=""
+
 def send_a_secret_message() :     #This Function Is Used To Send a Secret Message To A Friend
 
     sys.stdout.write(Fore.BLACK+" ")
@@ -328,8 +331,6 @@ def send_a_secret_message() :     #This Function Is Used To Send a Secret Messag
     message_to=selection_of_friend()     #Calling To A function that will return selected friend
 
     while True:
-
-        global text
 
         text=raw_input(Fore.LIGHTBLUE_EX+"\nWRITE TEXT MESSAGE THAT YOU WANT TO SEND\n")
 
@@ -357,16 +358,16 @@ def send_a_secret_message() :     #This Function Is Used To Send a Secret Messag
 
         new_chat=ChattingMessages(text,True)
 
-        print  Fore.RED+"ALERT!!!%s Is Wriiten!!!"%(new_chat)
+        print Fore.RED+"ALERT!!!%s Is Wriiten!!!"%(new_chat)
 
         friends[message_to].old_chats.append(new_chat)
 
     else:
         original_image=raw_input("What is The Name Of Image In which You Want To Hide Message\n")
 
-        output_path=raw_input("What You Will Call Encrypted Message Under Image(IT's Output Path)\n")
+        output_path= raw_input("enter output path")
 
-        Steganography.encode(original_image,text,output_path)     #This will hide A Message Under The Image
+        Steganography.encode(original_image,output_path,text)     #This will hide A Message Under The Image
 
         new_chat=ChattingMessages(text,True)          #object of class ChattingMessages Is Created
 
@@ -386,7 +387,6 @@ def read_a_message() :
     sender=selection_of_friend()        #Which Chat Do You Want To Read,Who is the SEnDer Of chat
 
     #(Average Number Of Words Spoken By A Spy When WE recieve A Message)
-
     print "\nAverage Number Of Words Spoken By A Spy Is :%d" %(len(text.split()))
 
     if 'SOS' in text or 'SAVE ME' in text or 'SAVE ME!' in text or 'HELP' in text :
@@ -398,13 +398,11 @@ def read_a_message() :
                 print "\n"+chat.message
     else:
 
-        sender=selection_of_friend()
-
         output_path=raw_input("What Is Name Of Your File\n")
 
         secret_text=Steganography.decode(output_path)
 
-        print (Fore.GREEN+"The Text Message Is %s "%(secret_text))
+        print (Fore.GREEN+secret_text)
 
         new_chat=ChattingMessages(secret_text,False)
 
@@ -415,24 +413,34 @@ def read_a_message() :
         print("Your Secret Message Has Been Saved\n")
 
 def read_history_of_chat() :
-    init()
 
     chat_between=selection_of_friend()
 
     for chat in friends[chat_between].old_chats :
 
+
         if chat.sent_by_me :
 
-            print("[%s] %s %s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
+            sys.stdout.write(Fore.BLUE+ chat.sending_time.strftime("%d %B %Y"))
+
+            sys.stdout.write(Fore.RED+"You said")
+
+            sys.stdout.write(Fore.BLACK+ chat.message)
+        #print("[%s] %s: %s"%(chat.sending_time.strftime("%d %"))
+
+            # print("[%s] %s:%s"%(chat.sending_time.strftime("%d %B %Y"),"You said",chat.message))
 
 #HERE PRINTING CHAT HISTORY USING DIFFERENT COLOR AND TIME USING BLUE COLOR,SATISFYING ONE OF THE APPLICATION OBJECTIVE
 
         else :
+            sys.stdout.write(Fore.BLUE+ chat.sending_time.strftime("%d %B %Y"))
 
-            print(Fore.BLUE+"[%s} %s said %s"%(chat.sending_time.strftime("%d %B %Y"),friends[chat_between].first_name
+            sys.stdout.write(Fore.RED+ friends[chat_between].first_name)
 
-                        ,chat.message))
-    print(Style.RESET_ALL)
+            sys.stdout.write(Fore.BLACK+" Said ")
+
+            sys.stdout.write(Fore.BLACK+ chat.message )
+
             #PRINTING CHAT HISTORY USING DIFFERENT COLORS AND CHAT USING DIFFERENT COLOR AND SPY NAME IN RED COLOR
 
 def start_chat(spy):
@@ -442,15 +450,15 @@ def start_chat(spy):
     if spy.age > 12 and spy.age < 50:
 
         sys.stdout.write(Fore.BLACK+"Authentication complete. Welcome "+Fore.RED+"%s"%(spy.first_name))
-        print Fore.BLACK+" of age %d and rating of %f"%(spy.age,spy.rating)
+        print Fore.BLACK+" of age %d and rating of %f "%(spy.age,spy.rating)
 
         #PRINTING SPY NAME USING RED COLORS AND MESSAGES USING BLACK COLORS
 
         sys.stdout.write("Proud To Be Here\n") #USING SYS LIBRARY
 
-        show_menu = True
 
-        while show_menu:
+
+        while True:
 
             print("\tWHICH OPERATION DO YOU WANT TO PERFORM \n")
 
@@ -468,41 +476,52 @@ def start_chat(spy):
 
             print ("\t6. Closing The Application")
 
-            menu_choice = raw_input("Kindly Add One Choice From Above\n")
 
-            if len(menu_choice) > 0:
+            try:
 
-                menu_choice = int(menu_choice)
+                menu_choice = int(raw_input("Kindly Add One Choice From Above: "))
 
-                if menu_choice == 1:
+            except ValueError:
+                print "Enter a valid value"
+                continue
+            if menu_choice<=0:
+                print "sorry your response cannot be negative"
+                continue
+            elif  menu_choice >6:
+                print'Enter a valid value'
+                continue
+            else:
+                break
 
-                    spy.current_status_msg = add_status()
 
-                elif menu_choice == 2:
+
+        if menu_choice == 1:
+
+            spy.current_status_msg = add_status()
+
+        elif menu_choice == 2:
 
                     number_of_friends = add_new_friend()
 
                     print 'You have %d friends' % (number_of_friends)
 
-                elif menu_choice == 3:
+        elif menu_choice == 3:
 
                     send_a_secret_message()
 
-                elif menu_choice == 4:
+        elif menu_choice == 4:
 
                     read_a_message()
 
-                elif menu_choice == 5:
+        elif menu_choice == 5:
 
                     read_history_of_chat()
 
 
 
-                else:
+        else:
 
                     show_menu = False
-
-                    continue
 
     else:
 
@@ -569,6 +588,7 @@ elif answer.lower()=="n" and len(answer)>0 and re.search(v2,answer) :
     else :
 
         print("Enter A Valid Spy Name Only")
+
 
 else:
 
