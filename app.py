@@ -131,7 +131,7 @@ def add_status():           #METHOD FOR UPDATING STATUS MESSAGE
 
     if updated_status_message:
 
-        print 'Your updated status message is: %s' % (updated_status_message)
+        print Fore.BLUE+'Your updated status message is: %s' % (updated_status_message)
 
     else:
 
@@ -348,7 +348,7 @@ def send_a_secret_message() :     #This Function Is Used To Send a Secret Messag
 
     if len(text)>100 :
 
-        print(Fore.RED+"\nYOU HAVE ECEEDED THE LIMIT OF SENDING THE MESSAGE")
+        print(Fore.RED+"\nYOU HAVE EXEEDED THE LIMIT OF SENDING THE MESSAGE")
 
         print("SORRY WE ARE REMOVING YOU")
 
@@ -395,7 +395,9 @@ def read_a_message() :
 
             if chat.sent_by_me :
 
+
                 print "\n"+chat.message
+
     else:
 
         output_path=raw_input("What Is Name Of Your File\n")
@@ -476,52 +478,34 @@ def start_chat(spy):
 
             print ("\t6. Closing The Application")
 
+            menu_choice = int(raw_input("Kindly Add One Choice From Above: "))
 
-            try:
+            if menu_choice == 1:
 
-                menu_choice = int(raw_input("Kindly Add One Choice From Above: "))
+                spy.current_status_msg = add_status()
+            elif menu_choice == 2:
 
-            except ValueError:
-                print "Enter a valid value"
-                continue
-            if menu_choice<=0:
-                print "sorry your response cannot be negative"
-                continue
-            elif  menu_choice >6:
-                print'Enter a valid value'
-                continue
-            else:
+                        number_of_friends = add_new_friend()
+
+                        print 'You have %d friends' % (number_of_friends)
+
+            elif menu_choice == 3:
+
+                        send_a_secret_message()
+
+            elif menu_choice == 4:
+
+                        read_a_message()
+
+            elif menu_choice == 5:
+
+                        read_history_of_chat()
+            elif menu_choice == 6 :
                 break
+            else:
+                print("enter from valid options \n")
 
 
-
-        if menu_choice == 1:
-
-            spy.current_status_msg = add_status()
-
-        elif menu_choice == 2:
-
-                    number_of_friends = add_new_friend()
-
-                    print 'You have %d friends' % (number_of_friends)
-
-        elif menu_choice == 3:
-
-                    send_a_secret_message()
-
-        elif menu_choice == 4:
-
-                    read_a_message()
-
-        elif menu_choice == 5:
-
-                    read_history_of_chat()
-
-
-
-        else:
-
-                    show_menu = False
 
     else:
 
